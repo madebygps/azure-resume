@@ -24,13 +24,13 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
-            az storage blob upload-batch --account-name azureresumeacg -d '$web' -s frontend/
+            az storage blob upload-batch --account-name cloudresumesite -d '$web' -s frontend/
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
         azcliversion: 2.30.0
         inlineScript: |
-           az cdn endpoint purge --content-paths  "/*" --profile-name "azureresumeacloudguru" --name "azureresumeacloudguru" --resource-group "azureresume-rg"
+           az cdn endpoint purge --content-paths  "/*" --profile-name "CloudResumeChallengeGPS" --name "cloudresumechallengegps" --resource-group "cloud-resume-challenge-rg"
 
   # Azure logout 
     - name: logout
