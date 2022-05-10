@@ -4,7 +4,7 @@ on:
   push:
       branches: [ main ]
       paths:
-      - 'backend/**'
+      - 'backend/api/**'
 
 env:
   AZURE_FUNCTIONAPP_NAME: GetResumeCounter  # set this to your application's name
