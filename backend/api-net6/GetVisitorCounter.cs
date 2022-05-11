@@ -30,7 +30,7 @@ namespace Company.Function
             string jsonString = JsonSerializer.Serialize(input);
 
             response.WriteString(jsonString);
-
+            // custom output type
             return new MyOutputType()
             {
                 Counter = new Counter
