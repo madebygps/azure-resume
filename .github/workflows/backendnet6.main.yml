@@ -1,4 +1,4 @@
-name: deploy_backend
+name: deploy_backend_net6
 
 on:
   push:
