@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = tests
+build_property.ProjectDir = /Users/gps/Developer/azure-resume/backend/tests/
