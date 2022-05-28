@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
@@ -17,7 +16,7 @@ namespace Company.Function
         }
 
         [Function("GetVisitorCounter")]
-        public MyOutputType Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+        public MyOutputType Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req, 
         [CosmosDBInput(databaseName: "CloudResume", collectionName: "Counter", ConnectionStringSetting = "CosmosDbConnectionString", Id = "index",
                 PartitionKey = "index")] Counter input)
         {
