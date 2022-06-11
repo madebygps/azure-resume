@@ -1,6 +1,6 @@
 # azure-resume
 
-My own azure resume, following [ACG project video.](youtube.com/acloudguru)
+My own azure resume, following [ACG project video.](https://youtu.be/ieYrBWmkfno)
 
 ## Demo
 
