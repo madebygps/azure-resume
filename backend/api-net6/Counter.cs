@@ -1,14 +1,13 @@
 using System.Text.Json.Serialization;
 
-namespace Company.Function
+namespace Company.Function;
+
+public class Counter 
 {
-    public class Counter 
-    {
-        
-        [JsonPropertyName("id")]
-        public string Id {get; set;}
-        
-        [JsonPropertyName("count")]
-        public int Count {get;set;}
-    }
+    
+    [JsonPropertyName("id")]
+    public string? Id {get; set;}
+    
+    [JsonPropertyName("count")]
+    public int Count {get;set;}
 }
