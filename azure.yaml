@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: azure-resume
+services:
+  web:
+    project: frontend
+    language: js
+    host: staticwebapp
+  api:
+    project: backend/api-net6
+    language: csharp
+    host: function
