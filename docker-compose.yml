@@ -1,0 +1,19 @@
+version: '3'
+services:
+  backend:
+    image: mcr.microsoft.com/devcontainers/dotnet:1-7.0-bullseye
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: sleep infinity
+    links:
+      - frontend
+    # ...
+
+  frontend:
+    image: mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: sleep infinity
+    # ...`
