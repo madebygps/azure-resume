@@ -1,6 +1,6 @@
 version: '3'
 services:
-  backend:
+  api:
     image: mcr.microsoft.com/devcontainers/dotnet:1-7.0-bullseye
     volumes:
       # Mount the root folder that contains .git
@@ -16,4 +16,4 @@ services:
       # Mount the root folder that contains .git
       - .:/workspace:cached
     command: sleep infinity
-    # ...`
+    # ...
