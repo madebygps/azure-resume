@@ -32,13 +32,17 @@
 		"vscode": {
 			"extensions": [
 				"ms-azuretools.vscode-azurefunctions",
-				"ms-dotnettools.csharp"
+				"ms-dotnettools.csharp",
+				"rangav.vscode-thunder-client",
+				"GitHub.copilot"
+			
 			]
 		}
 	},
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
+	"postCreateCommand": "chmod +x /workspace/api/setup.sh; /workspace/api/setup.sh"
+	
 
 	// Configure tool-specific properties.
 	// "customizations": {},

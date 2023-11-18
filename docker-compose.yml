@@ -6,8 +6,8 @@ services:
       # Mount the root folder that contains .git
       - .:/workspace:cached
     command: sleep infinity
-    links:
-      - frontend
+    networks:
+      - mynetwork
     # ...
 
   frontend:
@@ -16,4 +16,14 @@ services:
       # Mount the root folder that contains .git
       - .:/workspace:cached
     command: sleep infinity
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
+    ipam:
+      driver: default
+    
+    
     # ...
