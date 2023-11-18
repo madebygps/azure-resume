@@ -34,8 +34,8 @@
 				"ms-azuretools.vscode-azurefunctions",
 				"ms-dotnettools.csharp",
 				"rangav.vscode-thunder-client",
-				"GitHub.copilot"
-			
+				"GitHub.copilot",
+				"ms-dotnettools.csdevkit"
 			]
 		}
 	},

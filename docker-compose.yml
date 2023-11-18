@@ -21,10 +21,11 @@ services:
     networks: 
       - mynet
       
-mynet:
-  driver: bridge
-  ipam:
-    driver: default
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      driver: default
   
 
     
