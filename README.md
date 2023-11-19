@@ -2,7 +2,7 @@
 
 This is my Cloud Resume Challenge built on Azure. It's a static website hosted on Azure Storage, with a visitor counter built on Azure Functions. The website is built with HTML, CSS, and JavaScript. The visitor counter is built with .NET and Azure Functions. 
 
-If you'd like to build your own, here is the template [GitHub Repo](https://github.com/madebygps/cgc-azure-resume-starter) and YouTube video [video](https://youtu.be/ieYrBWmkfno)
+If you'd like to build your own, here is the YouTube video [video](https://youtu.be/ieYrBWmkfno) 
 
 ![architecture](architecture.png)
 
