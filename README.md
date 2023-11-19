@@ -8,7 +8,7 @@ If you'd like to build your own, here is the template [GitHub Repo](https://gith
 
 ## Demo
 
-[View it live here](https://cloudresumechallengegps.azureedge.net/)
+[View it live here(https://www.gpsresume.com/)
 
 ## Pre-requisites
 
