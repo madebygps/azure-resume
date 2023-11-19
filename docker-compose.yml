@@ -1,7 +1,7 @@
 version: '3'
 services:
   api:
-    image: mcr.microsoft.com/devcontainers/dotnet:1-7.0-bullseye
+    image: mcr.microsoft.com/devcontainers/dotnet:8.0-bookworm
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached

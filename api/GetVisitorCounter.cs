@@ -12,13 +12,13 @@ public class GetVisitorCounter
 {
     private readonly ILogger _logger;
 
-    public GetVisitorCounter(ILoggerFactory loggerFactory)
+    public GetVisitorCounter(ILogger<GetVisitorCounter> logger)
     {
-        _logger = loggerFactory.CreateLogger<GetVisitorCounter>();
+        _logger = logger;
     }
 
     [Function("GetVisitorCounter")]
-    public MyOutputType Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
+    public async Task<UpdatedCounter> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
     [CosmosDBInput("CloudResume","Counter", Connection = "CosmosDbConnectionString", Id = "index",
             PartitionKey = "index")] Counter counter)
     {
@@ -26,11 +26,11 @@ public class GetVisitorCounter
         var response = req.CreateResponse(HttpStatusCode.OK);
         response.Headers.Add("Content-Type", "application/json; charset=utf-8");
         string jsonString = JsonSerializer.Serialize(counter);
-        response.WriteString(jsonString);
-        counter.Count =+ counter.Count+1;
-        return new MyOutputType()
+        await response.WriteStringAsync(jsonString);
+        counter.Count += 1;
+        return new UpdatedCounter()
         {
-            UpdatedCounter = counter,
+            NewCounter = counter,
             HttpResponse = response
         };
     }

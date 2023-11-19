@@ -3,11 +3,10 @@ using Microsoft.Azure.Functions.Worker.Http;
 
 
 namespace Api.Function;
-public class MyOutputType
+public class UpdatedCounter
 {
 
-
     [CosmosDBOutput("CloudResume", "Counter", Connection = "CosmosDbConnectionString")]
-    public Counter? UpdatedCounter { get; set; }
+    public Counter? NewCounter { get; set; }
     public HttpResponseData? HttpResponse { get; set; }
 }
