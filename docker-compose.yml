@@ -20,6 +20,18 @@ services:
     command: sleep infinity
     networks: 
       - mynet
+
+  tests:
+    image: mcr.microsoft.com/devcontainers/dotnet:8.0-bookworm
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: sleep infinity
+    links:
+      - api
+    networks: 
+      - mynet    
+    # ...
       
 networks:
   mynet:
