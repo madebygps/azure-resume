@@ -30,7 +30,7 @@ jobs:
       with:
         azcliversion: 2.30.0
         inlineScript: |
-           az cdn endpoint purge --content-paths  "/*" --profile-name "CloudResumeChallengeGPS" --name "cloudresumechallengegps" --resource-group "cloud-resume-challenge-rg"
+           az cdn endpoint purge --content-paths  "/*" --profile-name "CloudResumeChallengeGPS" --name "gpsazuresume" --resource-group "cloud-resume-challenge-rg"
 
   # Azure logout 
     - name: logout

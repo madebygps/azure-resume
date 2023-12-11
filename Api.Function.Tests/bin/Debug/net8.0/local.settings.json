@@ -1,0 +1,7 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "CosmosDbConnectionString": "AccountEndpoint=https://cloudresumechallenge.documents.azure.com:443/;AccountKey=lnOuFzipft2LeuxjZU351QnPwg5gDgql9u22kLnVSw2fVeJU3o1p5rul4VwqqJCHrC9tLBu9LlA7XSywVlgexA==;"
+  }
+}

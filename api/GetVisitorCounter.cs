@@ -10,11 +10,13 @@ namespace Api.Function;
 
 public class GetVisitorCounter
 {
-    private readonly ILogger _logger;
+    private readonly ILogger<GetVisitorCounter> _logger;
+    private readonly IVisitorCounterService _visitorCounterService;
 
-    public GetVisitorCounter(ILogger<GetVisitorCounter> logger)
+    public GetVisitorCounter(ILogger<GetVisitorCounter> logger, IVisitorCounterService visitorCounterService)
     {
         _logger = logger;
+        _visitorCounterService = visitorCounterService;
     }
 
     [Function("GetVisitorCounter")]
@@ -23,12 +25,15 @@ public class GetVisitorCounter
             PartitionKey = "index")] Counter counter)
     {
 
+
+        counter = _visitorCounterService.IncrementCounter(counter);
+
         var response = req.CreateResponse(HttpStatusCode.OK);
         response.Headers.Add("Content-Type", "application/json; charset=utf-8");
         string jsonString = JsonSerializer.Serialize(counter);
         await response.WriteStringAsync(jsonString);
-        counter.Count += 1;
-        return new UpdatedCounter()
+
+        return new UpdatedCounter
         {
             NewCounter = counter,
             HttpResponse = response
