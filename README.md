@@ -8,7 +8,7 @@ If you'd like to build your own, here is the YouTube video [video](https://youtu
 
 ## Demo
 
-[View it live here(https://www.gpsresume.com/)
+[View it live here](https://www.gpsresume.com/)
 
 ## Pre-requisites
 
@@ -58,7 +58,6 @@ The back-end is an [HTTP triggered Azure Functions](https://docs.microsoft.com/e
 [Testing is important](https://dev.to/flippedcoding/its-important-to-test-your-code-3lid), though my tests are simple, they exist. I am using .NET but some of these resources will apply to any language.
 
 - [Getting Started with xUnit.net](https://xunit.net/docs/getting-started/netcore/cmdline)
-- [How to setup Xunit with Azure Functions](https://madebygps.com/how-to-use-xunit-with-azure-functions/)
 - [Testing Azure Functions.](https://techcommunity.microsoft.com/t5/fasttrack-for-azure/azure-functions-part-2-unit-and-integration-testing/ba-p/3769764) 
 
 
@@ -67,3 +66,8 @@ The back-end is an [HTTP triggered Azure Functions](https://docs.microsoft.com/e
 - This is how you can deploy a blob storage static site with [GitHub actions.](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-static-site-github-actions)
 - This is how you can [deploy an Azure Function to Azure with GitHub Actions.](https://github.com/marketplace/actions/azure-functions-action)
 - [Implement .NET testing in GitHub Actions.](https://docs.github.com/en/actions/guides/building-and-testing-net)
+
+## TO DO
+
+- Implement tests into CICD.
+- Create IaC files.
