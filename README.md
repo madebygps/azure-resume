@@ -71,3 +71,4 @@ The back-end is an [HTTP triggered Azure Functions](https://docs.microsoft.com/e
 
 - Implement tests into CICD.
 - Create IaC files.
+- Improve tests and tests documentation.
