@@ -27,7 +27,7 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az cdn endpoint purge --content-paths  "/*" --profile-name "CloudResumeChallengeGPS" --name "gpsazuresume" --resource-group "cloud-resume-challenge-rg"
+            az cdn endpoint purge --content-paths  "/*" --profile-name "CloudResumeChallengeGPS" --name "gpsazuresume" --resource-group "cloudresumechallenge-rg"
 
       # Azure logout
       - name: logout
