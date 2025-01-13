@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest # For Linux, use ubuntu-latest
     steps:
     - name: 'Checkout GitHub Action'
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # If you want to use Azure RBAC instead of Publish Profile, then uncomment the task below
     # - name: 'Login via Azure CLI'
@@ -44,3 +44,5 @@ jobs:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
         publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }} # Remove publish-profile to use Azure RBAC
+        sku: flexconsumption
+        remote-build: false
