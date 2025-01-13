@@ -8,7 +8,7 @@ on:
       - 'api/**'
 
 env:
-  AZURE_FUNCTIONAPP_NAME: 'AzureResumeVisitorCounter'   # set this to your function app name on Azure
+  AZURE_FUNCTIONAPP_NAME: 'gpsazureresumecounter'   # set this to your function app name on Azure
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'api'       # set this to the path to your function app project, defaults to the repository root
   DOTNET_VERSION: '8.0.x'                   # set this to the dotnet version to use (e.g. '2.1.x', '3.1.x', '5.0.x')
 
