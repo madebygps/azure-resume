@@ -21,8 +21,8 @@ public class GetVisitorCounter
 
     [Function("GetVisitorCounter")]
     public async Task<UpdatedCounter> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
-    [CosmosDBInput("CloudResume","Counter", Connection = "CosmosDbConnectionString", Id = "index",
-            PartitionKey = "index")] Counter counter)
+    [CosmosDBInput("CloudResume", "Counter", Id = "index",
+            PartitionKey = "index", Connection = "")] Counter counter)
     {
 
 
