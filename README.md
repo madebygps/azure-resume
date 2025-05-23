@@ -68,6 +68,21 @@ The back-end is an [HTTP triggered Azure Function](https://docs.microsoft.com/az
 - [Write to a Cosmos DB item with Functions binding](https://docs.microsoft.com/azure/azure-functions/functions-bindings-cosmosdb-v2-output?tabs=csharp)
 - [Enable CORS with Azure Functions locally](https://learn.microsoft.com/azure/azure-functions/functions-develop-local#local-settings-file) and once it's [deployed to Azure](https://docs.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings?tabs=portal#cors).
 
+### Authentication
+
+The application uses DefaultAzureCredential to authenticate with Azure Cosmos DB. Configuration requires:
+
+1. Copy `api/local.settings.json.template` to `api/local.settings.json` for local development
+2. Set the following values in local.settings.json:
+   - `CosmosDbConnection__accountEndpoint`: Your Cosmos DB endpoint URL
+   - `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`: For local development with a service principal
+3. For deployment to Azure, configure these app settings in your Function App:
+   - `CosmosDbConnection__accountEndpoint`: Your Cosmos DB endpoint URL
+
+When deployed to Azure Functions, the app will use the Function App's managed identity to authenticate with Cosmos DB. Make sure to:
+1. Enable system-assigned managed identity on your Function App
+2. Grant the managed identity appropriate permissions on your Cosmos DB account
+
 ## Testing Resources
 
 [Testing is important](https://dev.to/flippedcoding/its-important-to-test-your-code-3lid). Though my tests are simple, they exist. I am using .NET but some of these resources will apply to any language.
