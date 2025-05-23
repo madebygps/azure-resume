@@ -75,7 +75,7 @@ The application uses DefaultAzureCredential to authenticate with Azure Cosmos DB
 #### Local Development
 
 1. Copy `api/local.settings.json.template` to `api/local.settings.json`
-2. Set the `CosmosDbConnection__accountEndpoint` to your Cosmos DB endpoint URL
+2. Set the `CosmosDbEndpoint` to your Cosmos DB endpoint URL
 3. For local authentication, you can use:
    - **Azure CLI**: Sign in with `az login` before running the application
    - **Azure Developer CLI**: Sign in with `azd auth login` before running the application
@@ -91,7 +91,7 @@ When deployed to Azure Functions, the app will use the Function App's managed id
 1. Enable system-assigned managed identity on your Function App
 2. Grant the managed identity appropriate permissions on your Cosmos DB account
 3. Configure the app setting in your Function App:
-   - `CosmosDbConnection__accountEndpoint`: Your Cosmos DB endpoint URL
+   - `CosmosDbEndpoint`: Your Cosmos DB endpoint URL
 
 ## Testing Resources
 

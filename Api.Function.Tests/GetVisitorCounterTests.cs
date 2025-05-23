@@ -2,6 +2,8 @@ using Microsoft.Extensions.Logging;
 using NSubstitute;
 using FluentAssertions;
 using Microsoft.Extensions.Logging.Abstractions;
+using Microsoft.Azure.Functions.Worker.Http;
+using System.Net;
 
 namespace Api.Function.Tests.Unit
 {
@@ -10,10 +12,11 @@ namespace Api.Function.Tests.Unit
         private readonly GetVisitorCounter _sut;
         private readonly ILogger<GetVisitorCounter> _logger = NullLogger<GetVisitorCounter>.Instance;
         private readonly IVisitorCounterService _mockCounterService = Substitute.For<IVisitorCounterService>();
+        private readonly ICosmosDbService _mockCosmosDbService = Substitute.For<ICosmosDbService>();
 
         public GetVisitorCounterTests()
         {
-            _sut = new GetVisitorCounter(_logger, _mockCounterService);
+            _sut = new GetVisitorCounter(_logger, _mockCounterService, _mockCosmosDbService);
         }
 
         // Test methods...
@@ -32,6 +35,4 @@ namespace Api.Function.Tests.Unit
             updatedCounter.Count.Should().Be(2);
         }
     }
-
-
 }

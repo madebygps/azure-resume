@@ -4,10 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Api.Function;
 using Azure.Identity;
 using Microsoft.Extensions.Azure;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Azure.Cosmos;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
-    .ConfigureServices(services =>
+    .ConfigureServices((context, services) =>
     {
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
@@ -24,6 +26,20 @@ var host = new HostBuilder()
         {
             builder.UseCredential(provider => provider.GetRequiredService<DefaultAzureCredential>());
         });
+        
+        // Configure CosmosClient with DefaultAzureCredential
+        var cosmosEndpoint = context.Configuration["CosmosDbEndpoint"];
+        if (!string.IsNullOrEmpty(cosmosEndpoint))
+        {
+            services.AddSingleton(sp => 
+            {
+                var credential = sp.GetRequiredService<DefaultAzureCredential>();
+                return new CosmosClient(cosmosEndpoint, credential);
+            });
+            
+            // Add the CosmosDB service
+            services.AddSingleton<ICosmosDbService, CosmosDbService>();
+        }
     })
     .Build();
 

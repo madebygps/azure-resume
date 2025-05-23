@@ -41,7 +41,7 @@ azd auth login
 ### Configuration
 
 1. Create a local.settings.json file by copying local.settings.json.template
-2. Update the `CosmosDbConnection__accountEndpoint` setting with your Cosmos DB URL
+2. Update the `CosmosDbEndpoint` setting with your Cosmos DB URL
 
 ```json
 {
@@ -49,7 +49,7 @@ azd auth login
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "CosmosDbConnection__accountEndpoint": "https://<your-cosmosdb-account>.documents.azure.com:443/"
+    "CosmosDbEndpoint": "https://<your-cosmosdb-account>.documents.azure.com:443/"
   },
   "Host": {
     "LocalHttpPort": 7071,
@@ -65,3 +65,12 @@ func start
 ```
 
 The function will run on http://localhost:7071 by default.
+
+### Changes from Binding Approach
+
+This project originally used Azure Functions Cosmos DB bindings with connection strings. It now uses the CosmosClient directly with DefaultAzureCredential for improved security. This approach:
+
+1. Eliminates the need for connection strings with sensitive keys
+2. Provides more flexibility in how we interact with Cosmos DB
+3. Makes it easier to use managed identities in production
+4. Works well with local development using Azure CLI or Azure Developer CLI
