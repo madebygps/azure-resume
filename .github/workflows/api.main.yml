@@ -34,7 +34,8 @@ jobs:
       shell: bash
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
-        dotnet publish api.csproj --configuration Release --output ./output
+        dotnet restore api.csproj
+        dotnet publish api.csproj --configuration Release --output ./output --no-restore --verbosity normal
         popd
 
     - name: 'Run Azure Functions Action'
