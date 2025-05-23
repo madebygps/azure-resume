@@ -44,5 +44,4 @@ jobs:
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
         sku: flexconsumption
         remote-build: false
-        respect-funcignore: true
     
