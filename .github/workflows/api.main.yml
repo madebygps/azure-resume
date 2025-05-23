@@ -55,6 +55,7 @@ jobs:
         app-settings-json: |
           {
             "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+            "CosmosDbEndpoint": "${{ secrets.COSMOSDB_ENDPOINT }}",
             "CosmosDbDatabaseName": "AzureResume",
             "CosmosDbContainerName": "Counter"
           }
