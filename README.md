@@ -70,18 +70,28 @@ The back-end is an [HTTP triggered Azure Function](https://docs.microsoft.com/az
 
 ### Authentication
 
-The application uses DefaultAzureCredential to authenticate with Azure Cosmos DB. Configuration requires:
+The application uses DefaultAzureCredential to authenticate with Azure Cosmos DB. This simplifies credential management by supporting multiple authentication methods.
 
-1. Copy `api/local.settings.json.template` to `api/local.settings.json` for local development
-2. Set the following values in local.settings.json:
-   - `CosmosDbConnection__accountEndpoint`: Your Cosmos DB endpoint URL
-   - `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`: For local development with a service principal
-3. For deployment to Azure, configure these app settings in your Function App:
-   - `CosmosDbConnection__accountEndpoint`: Your Cosmos DB endpoint URL
+#### Local Development
 
-When deployed to Azure Functions, the app will use the Function App's managed identity to authenticate with Cosmos DB. Make sure to:
+1. Copy `api/local.settings.json.template` to `api/local.settings.json`
+2. Set the `CosmosDbConnection__accountEndpoint` to your Cosmos DB endpoint URL
+3. For local authentication, you can use:
+   - **Azure CLI**: Sign in with `az login` before running the application
+   - **Azure Developer CLI**: Sign in with `azd auth login` before running the application
+   - **Visual Studio**: Use Visual Studio authentication
+   - **Service Principal**: Set `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, and `AZURE_CLIENT_SECRET` environment variables
+
+The DefaultAzureCredential will automatically detect and use credentials from the development environment.
+
+#### Azure Deployment
+
+When deployed to Azure Functions, the app will use the Function App's managed identity:
+
 1. Enable system-assigned managed identity on your Function App
 2. Grant the managed identity appropriate permissions on your Cosmos DB account
+3. Configure the app setting in your Function App:
+   - `CosmosDbConnection__accountEndpoint`: Your Cosmos DB endpoint URL
 
 ## Testing Resources
 

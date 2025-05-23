@@ -14,6 +14,9 @@ var host = new HostBuilder()
         services.AddSingleton<IVisitorCounterService, VisitorCounterService>();
         
         // Add Azure Identity DefaultAzureCredential
+        // This will automatically use the most appropriate credential based on the environment:
+        // - Azure CLI or Azure Developer CLI authentication when developing locally
+        // - Managed Identity when deployed to Azure
         services.AddSingleton<DefaultAzureCredential>();
         
         // Configure Azure services to use DefaultAzureCredential

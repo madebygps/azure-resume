@@ -3,10 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "CosmosDbConnection__accountEndpoint": "https://<your-cosmosdb-account>.documents.azure.com:443/",
-    "AZURE_TENANT_ID": "<your-azure-tenant-id>",
-    "AZURE_CLIENT_ID": "<your-azure-client-id>",
-    "AZURE_CLIENT_SECRET": "<your-azure-client-secret>"
+    "CosmosDbConnection__accountEndpoint": "https://<your-cosmosdb-account>.documents.azure.com:443/"
   },
   "Host": {
     "LocalHttpPort": 7071,
