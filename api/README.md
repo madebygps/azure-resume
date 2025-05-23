@@ -42,6 +42,7 @@ azd auth login
 
 1. Create a local.settings.json file by copying local.settings.json.template
 2. Update the `CosmosDbEndpoint` setting with your Cosmos DB URL
+3. Add `CosmosDbDatabaseName` and `CosmosDbContainerName` settings
 
 ```json
 {
@@ -49,7 +50,9 @@ azd auth login
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "CosmosDbEndpoint": "https://<your-cosmosdb-account>.documents.azure.com:443/"
+    "CosmosDbEndpoint": "https://<your-cosmosdb-account>.documents.azure.com:443/",
+    "CosmosDbDatabaseName": "AzureResume",
+    "CosmosDbContainerName": "Counter"
   },
   "Host": {
     "LocalHttpPort": 7071,
@@ -74,3 +77,17 @@ This project originally used Azure Functions Cosmos DB bindings with connection 
 2. Provides more flexibility in how we interact with Cosmos DB
 3. Makes it easier to use managed identities in production
 4. Works well with local development using Azure CLI or Azure Developer CLI
+
+## Deployment
+
+The function is deployed using GitHub Actions. The workflow is defined in `.github/workflows/api.main.yml`.
+
+### Important Deployment Notes
+
+1. The function uses .NET 9.0 with the isolated process model
+2. Make sure the following application settings are configured in Azure:
+   - `FUNCTIONS_WORKER_RUNTIME`: "dotnet-isolated"
+   - `CosmosDbDatabaseName`: "AzureResume" (or your database name)
+   - `CosmosDbContainerName`: "Counter" (or your container name)
+3. The GitHub Action workflow sets these settings during deployment
+4. If you deploy manually, make sure to include these settings
