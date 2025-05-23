@@ -1,16 +1,36 @@
-namespace Api.Function;
+using Microsoft.Extensions.Logging;
 
-public interface IVisitorCounterService
+namespace Api.Function
 {
-    Counter IncrementCounter(Counter counter);
-}
-
-public class VisitorCounterService : IVisitorCounterService
-{
-    public Counter IncrementCounter(Counter counter)
+    public interface IVisitorCounterService
     {
-        // Increment and return the counter
-        counter.Count += 1;
-        return counter;
+        Counter IncrementCounter(Counter counter);
+    }
+
+    public class VisitorCounterService : IVisitorCounterService
+    {
+        private readonly ILogger<VisitorCounterService> _logger;
+
+        public VisitorCounterService(ILogger<VisitorCounterService> logger)
+        {
+            _logger = logger;
+        }
+
+        public Counter IncrementCounter(Counter counter)
+        {
+            _logger.LogInformation("Incrementing counter from {CurrentCount}", counter.Count);
+            
+            // Ensure Id is preserved
+            if (string.IsNullOrEmpty(counter.Id))
+            {
+                counter.Id = "index";
+                _logger.LogWarning("Counter Id was null or empty, set to 'index'");
+            }
+            
+            // Increment the count directly on the existing object
+            counter.Count++;
+            
+            return counter;
+        }
     }
 }
