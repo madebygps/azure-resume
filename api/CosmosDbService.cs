@@ -26,8 +26,8 @@ namespace Api.Function
             _cosmosClient = cosmosClient;
             _logger = logger;
             
-            _databaseName = configuration["CosmosDbDatabaseName"];
-            _containerName = configuration["CosmosDbContainerName"];
+            _databaseName = configuration["CosmosDbDatabaseName"] ?? throw new ArgumentNullException(nameof(configuration), "CosmosDbDatabaseName is required");
+            _containerName = configuration["CosmosDbContainerName"] ?? throw new ArgumentNullException(nameof(configuration), "CosmosDbContainerName is required");
             
             _logger.LogInformation("Initializing CosmosDbService with database: {Database}, container: {Container}", 
                 _databaseName, _containerName);
