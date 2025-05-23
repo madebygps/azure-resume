@@ -21,7 +21,7 @@ jobs:
 
     # If you want to use Azure RBAC instead of Publish Profile, then uncomment the task below
     - name: 'Login via Azure CLI'
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }} # set up AZURE_RBAC_CREDENTIALS secrets in your repository
 
@@ -31,31 +31,18 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: 'Resolve Project Dependencies Using Dotnet'
-      shell: bash # For Linux, use bash
+      shell: bash
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet build --configuration Release --output ./output
-        # Ensure all required files for isolated process are included
-        cp host.json ./output/
-        # Add explicit environment variable for isolated worker
-        echo '{ "IsEncrypted": false, "Values": { "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated" } }' > ./output/local.settings.json
         popd
 
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
-      id: fa
       with:
         app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-       # publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }} # Remove publish-profile to use Azure RBAC
         sku: flexconsumption
         remote-build: false
         respect-funcignore: true
-        enable-oryx-build: false
-        app-settings-json: |
-          {
-            "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-            "CosmosDbEndpoint": "${{ secrets.COSMOSDB_ENDPOINT }}",
-            "CosmosDbDatabaseName": "AzureResume",
-            "CosmosDbContainerName": "Counter"
-          }
+    
