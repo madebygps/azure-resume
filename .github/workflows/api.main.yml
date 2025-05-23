@@ -35,6 +35,10 @@ jobs:
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
         dotnet build --configuration Release --output ./output
+        # Ensure all required files for isolated process are included
+        cp host.json ./output/
+        # Add explicit environment variable for isolated worker
+        echo '{ "IsEncrypted": false, "Values": { "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated" } }' > ./output/local.settings.json
         popd
 
     - name: 'Run Azure Functions Action'
@@ -46,3 +50,12 @@ jobs:
        # publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }} # Remove publish-profile to use Azure RBAC
         sku: flexconsumption
         remote-build: false
+        respect-funcignore: true
+        enable-oryx-build: false
+        app-settings-json: |
+          {
+            "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+            "CosmosDbEndpoint": "${{ secrets.COSMOSDB_ENDPOINT }}",
+            "CosmosDbDatabaseName": "AzureResume",
+            "CosmosDbContainerName": "Counter"
+          }
