@@ -13,6 +13,11 @@ var host = new HostBuilder()
     {
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
+        services.Configure<System.Text.Json.JsonSerializerOptions>(options => 
+{
+    // This ensures property names are preserved during serialization
+    options.PropertyNamingPolicy = null;
+});
         services.AddSingleton<IVisitorCounterService, VisitorCounterService>();
         
         // Add Azure Identity DefaultAzureCredential
