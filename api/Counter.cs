@@ -1,30 +1,44 @@
 using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 
 namespace Api.Function
 {
     public class Counter
     {
-        // Use both System.Text.Json and Newtonsoft.Json attributes to ensure proper serialization
         [JsonPropertyName("id")]
-        [Newtonsoft.Json.JsonProperty("id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = string.Empty;
+
+        [JsonPropertyName("pk")]
+        public string PartitionKey { get; set; } = string.Empty;
 
         [JsonPropertyName("count")]
-        [Newtonsoft.Json.JsonProperty("count")]
         public int Count { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; } = "counter";
+
+        [JsonPropertyName("lastUpdated")]
+        public DateTime LastUpdated { get; set; } = DateTime.UtcNow;
+
+        [JsonPropertyName("_ts")]
+        public long Timestamp { get; set; }
+
+        [JsonPropertyName("_etag")]
+        public string? ETag { get; set; }
 
         public Counter(string id, int count)
         {
-            Id = id ?? throw new System.ArgumentNullException(nameof(id));
+            Id = id ?? throw new ArgumentNullException(nameof(id));
+            PartitionKey = id; 
             Count = count;
+            LastUpdated = DateTime.UtcNow;
         }
-        
-        // Empty constructor for serialization
+
         public Counter() 
         {
-            Id = "index";  // Match your actual document ID
+            Id = "visitor-count";
+            PartitionKey = "visitor-count";
             Count = 0;
+            LastUpdated = DateTime.UtcNow;
         }
     }
 }

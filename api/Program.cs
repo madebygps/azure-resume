@@ -13,17 +13,19 @@ var host = new HostBuilder()
     {
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
+        
+        // Configure JSON serialization for your Counter model
         services.Configure<System.Text.Json.JsonSerializerOptions>(options => 
-{
-    // This ensures property names are preserved during serialization
-    options.PropertyNamingPolicy = null;
-});
-        services.AddSingleton<IVisitorCounterService, VisitorCounterService>();
+        {
+            // Use camelCase for consistency with your Counter model JsonPropertyName attributes
+            options.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+            options.WriteIndented = false; // Optimize for performance
+        });
+        
+        // REMOVE this line - no longer needed:
+        // services.AddSingleton<IVisitorCounterService, VisitorCounterService>();
         
         // Add Azure Identity DefaultAzureCredential
-        // This will automatically use the most appropriate credential based on the environment:
-        // - Azure CLI or Azure Developer CLI authentication when developing locally
-        // - Managed Identity when deployed to Azure
         services.AddSingleton<DefaultAzureCredential>();
         
         // Configure Azure services to use DefaultAzureCredential
@@ -32,17 +34,25 @@ var host = new HostBuilder()
             builder.UseCredential(provider => provider.GetRequiredService<DefaultAzureCredential>());
         });
         
-        // Configure CosmosClient with DefaultAzureCredential
+        // Configure CosmosClient with DefaultAzureCredential and performance optimizations
         var cosmosEndpoint = context.Configuration["CosmosDbEndpoint"];
         if (!string.IsNullOrEmpty(cosmosEndpoint))
         {
             services.AddSingleton(sp => 
             {
                 var credential = sp.GetRequiredService<DefaultAzureCredential>();
-                return new CosmosClient(cosmosEndpoint, credential);
+                var cosmosClientOptions = new CosmosClientOptions
+                {
+                    ConnectionMode = ConnectionMode.Direct, // Better performance
+                    ConsistencyLevel = ConsistencyLevel.Session, // Balanced performance/consistency
+                    RequestTimeout = TimeSpan.FromSeconds(10),
+                    MaxRetryAttemptsOnRateLimitedRequests = 3
+                };
+                
+                return new CosmosClient(cosmosEndpoint, credential, cosmosClientOptions);
             });
             
-            // Add the CosmosDB service
+            // Add the CosmosDB service - this is the only service you need now
             services.AddSingleton<ICosmosDbService, CosmosDbService>();
         }
     })
