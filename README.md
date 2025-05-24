@@ -1,6 +1,6 @@
 # 🚀 GPS's Azure Resume
 
-This is my Cloud Resume Challenge built on Azure. It's a static website hosted on Azure Storage, with a visitor counter built on Azure Functions. The website is built with HTML, CSS, and JavaScript. The visitor counter is built with .NET 9.0 and Azure Functions using the isolated process model.
+This is my Cloud Resume Challenge built on Azure. It's a static website hosted on Azure Storage, with a visitor counter built on Azure Functions. The website is built with HTML, CSS, and JavaScript. The visitor counter is built with .NET 8.0 and Azure Functions using the isolated process model.
 
 If you'd like to build your own, here is the YouTube video [video](https://youtu.be/ieYrBWmkfno).
 
@@ -32,7 +32,7 @@ I leverage [Dev Containers](https://code.visualstudio.com/docs/remote/containers
 
 - `frontend/`: Contains the website.
     - `main.js`: Contains visitor counter code.
-- `api/`: Contains the .NET 9.0 API deployed on Azure Functions.
+- `api/`: Contains the .NET 8.0 API deployed on Azure Functions.
     - `Program.cs`: Contains the dependency injection setup and DefaultAzureCredential configuration.
     - `CosmosDbService.cs`: Service for interacting with Cosmos DB.
     - `GetVisitorCounter.cs`: Contains the visitor counter code.
@@ -61,7 +61,7 @@ The front-end is a static site with HTML, CSS, and JavaScript. It includes a vis
 
 ## ⚡ Backend Resources
 
-The back-end is an [HTTP triggered Azure Function](https://docs.microsoft.com/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=csharp) with Azure Cosmos DB integration. The function is built using .NET 9.0 with the isolated process model and uses DefaultAzureCredential for secure authentication to Cosmos DB.
+The back-end is an [HTTP triggered Azure Function](https://docs.microsoft.com/azure/azure-functions/functions-bindings-http-webhook-trigger?tabs=csharp) with Azure Cosmos DB integration. The function is built using .NET 8.0 with the isolated process model and uses DefaultAzureCredential for secure authentication to Cosmos DB.
 
 - 🔧 [Create a Cosmos DB account](https://docs.microsoft.com/azure/cosmos-db/create-cosmosdb-resources-portal)
 - 🛠️ [Create an HTTP triggered Azure Function in Visual Studio Code](https://docs.microsoft.com/azure/azure-functions/functions-develop-vs-code?tabs=csharp)
